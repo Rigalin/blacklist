@@ -1,2 +1,6 @@
 username: Testing
 reason: Testing authors
+reasons: 
+- Foo
+- Bar
+- Baz
