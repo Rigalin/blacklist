@@ -13,24 +13,26 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script src="https://cdn.rawgit.com/nodeca/js-yaml/master/dist/js-yaml.min.js"></script>
     <script src="js/authors.js"></script>
 </head>
-<body ng-app="authorApp">
+<body ng-app="authorApp" ng-controller="authorController">
     <div class="container">
         <div class="jumbotron">
             <h1>Authors</h1>
             <h3>All authors mentioned below are to be dealt with with caution.</h3>
 
-            <table class="table table-striped" ng-controller="authorController" ng-hide="loading">
+            <table class="table table-striped" ng-hide="loading">
                 <tr>
                     <th>Spigot username</th>
                     <th>Why?</th>
                 </tr>
                 <tr ng-repeat="author in authors">
-                    <td>Bob</td>
-                    <td>Talks a lot of shit and refuses to work when paid</td>
+                    <td>{{ author.username }}</td>
+                    <td>{{ author.reason }}</td>
                 </tr>   
             </table>
+
             <div class="footer text-center text-muted">
                 Know someone who deserves to be on the list? Add them <a href="#">here</a>
             </div>
