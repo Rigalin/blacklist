@@ -22,15 +22,24 @@
             <h1>Authors</h1>
             <h3>All authors mentioned below are to be dealt with with caution.</h3>
 
-            <table class="table table-striped table-bordered" ng-hide="loading">
+            <table class="table table-striped table-bordered">
                 <tr>
                     <th>Spigot username</th>
                     <th>Why?</th>
                 </tr>
-                <tr ng-repeat="author in authors">
-                    <td>{{ author.username }}</td>
-                    <td>{{ author.reason }}</td>
-                </tr>   
+                <tr ng-repeat="author in authors" ng-hide="loading">
+                    <td><a href="{{ spigot(author) }}">{{ author.username }}</a></td>
+                    <td>
+                        <div ng-switch="author.multiple">
+                            <ul ng-switch-when="true">
+                                <li ng-repeat="reason in author.reasons">{{ reason }}</li>
+                            </ul>
+                            <ul ng-switch-default>
+                                <li>{{ author.reason }}</li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
             </table>
 
             <div class="footer text-center text-muted">

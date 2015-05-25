@@ -47,17 +47,27 @@ app.controller('authorController', function($scope, $http, Repository) {
 				return;
 			}
 
-			data.forEach(function(fileData) {
-				if(!fileData.name.endsWith('.yml')) return;
-				Repository.getFile(fileData.path).then(function(file) {
+			for (var i = 0; i < data.length; i++) {
+				if(!data[i].name.endsWith('.yml')) return;
+				Repository.getFile(data[i].path).then(function(file) {
 					var content = atob(file.content);
-					var yaml = jsyaml.load(content);
-					$scope.authors.push(yaml);
+					try {
+						var yaml = jsyaml.load(content);
+						yaml.multiple = (typeof yaml.reasons != 'undefined');
+						$scope.authors.push(yaml);
+					} catch (e) {
+						console.log(e);
+					}
 				});
-			});
+			};
 			$scope.loading = false;
 		});
 	};
+
+	$scope.spigot = function(author) {
+		if(typeof author.id === 'undefined') return '#';
+		return 'http://www.spigotmc.org/members/' + author.username + '.' + author.id + '/';
+	}
 
 	$scope.get();
 });
