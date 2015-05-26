@@ -1,5 +1,5 @@
-if (typeof String.prototype.endsWith !== 'function') {
-    String.prototype.endsWith = function(suffix) {
+if (typeof String.prototype.hasExtension !== 'function') {
+    String.prototype.hasExtension = function(suffix) {
         return this.indexOf(suffix, this.length - suffix.length) !== -1;
     };
 }
@@ -49,7 +49,7 @@ app.controller('userController', function($scope, $http, $timeout, Repository) {
 
 			try {
 				for (var i = 0; i < data.length; i++) {
-					if(data[i].name.endsWith('.yml')) {
+					if(data[i].name.hasExtension('.yml')) {
 						Repository.getFile(data[i].path).then(function(file) {
 							var content = atob(file.content);
 							var yaml = jsyaml.load(content);
