@@ -47,22 +47,24 @@ app.controller('pluginController', function($scope, $http, $timeout, Repository)
 				return;
 			}
 
-			for (var i = 0; i < data.length; i++) {
-				if(!data[i].name.endsWith('.yml')) return;
-				Repository.getFile(data[i].path).then(function(file) {
-					var content = atob(file.content);
-					try {
-						var yaml = jsyaml.load(content);
-						$scope.plugins.push(yaml);
-					} catch (e) {
-						console.log(e);
+			try {
+				for (var i = 0; i < data.length; i++) {
+					if(data[i].name.endsWith('.yml')) {
+						Repository.getFile(data[i].path).then(function(file) {
+							var content = atob(file.content);
+							var yaml = jsyaml.load(content);
+							$scope.plugins.push(yaml);
+						});
 					}
-				});
-			};
+				};
 
-			$timeout(function() {
+				$timeout(function() {
+					$scope.loading = false;
+				}, 1000);
+			} catch (e) {
 				$scope.loading = false;
-			}, 1000);
+				$scope.failed = true;
+			}
 		});
 	};
 	$scope.get();
