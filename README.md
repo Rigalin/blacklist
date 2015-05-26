@@ -10,7 +10,7 @@ Please review our contribution guidelines below before contributing. Failure to 
 
 ### Plugins
 1. Fork the repository.
-2. Create a `yml` file named after the author using the format below.
+2. Create a `yml` file named after the plugin using the format below.
 3. Commit your files
 4. Submit a pull request, bitches love pull requests!
 
