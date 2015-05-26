@@ -4,12 +4,12 @@ if (typeof String.prototype.endsWith !== 'function') {
     };
 }
 
-var app = angular.module('authorApp', []);
+var app = angular.module('userApp', []);
 
 app.factory('Repository', function($http) {
 	return {
 		getFiles: function() {
-			var promise = $http.get('https://api.github.com/repos/fireflies/caution/contents/authors', {
+			var promise = $http.get('https://api.github.com/repos/fireflies/watchlist/contents/users', {
 				headers: {
 					'Accept': 'application/vnd.github.v3+json'
 				}
@@ -19,7 +19,7 @@ app.factory('Repository', function($http) {
 			return promise;
 		},
 		getFile: function(file) {
-			var promise = $http.get('https://api.github.com/repos/fireflies/caution/contents/' + file, {
+			var promise = $http.get('https://api.github.com/repos/fireflies/watchlist/contents/' + file, {
 				headers: {
 					'Accept': 'application/vnd.github.v3+json'
 				}
@@ -31,15 +31,15 @@ app.factory('Repository', function($http) {
 	}
 });
 
-app.controller('authorController', function($scope, $http, Repository) {
+app.controller('userController', function($scope, $http, Repository) {
 	$scope.loading = false;
 	$scope.failed = false;
-	$scope.authors = [];
+	$scope.users = [];
 
 	$scope.get = function() {
 		$scope.loading = true;
 		$scope.failed = false;
-		$scope.authors = [];
+		$scope.users = [];
 
 		Repository.getFiles().then(function(data) {
 			if(!Array.isArray(data)) {
@@ -54,7 +54,7 @@ app.controller('authorController', function($scope, $http, Repository) {
 					try {
 						var yaml = jsyaml.load(content);
 						yaml.multiple = (typeof yaml.reasons != 'undefined');
-						$scope.authors.push(yaml);
+						$scope.users.push(yaml);
 					} catch (e) {
 						console.log(e);
 					}
