@@ -1,15 +1,13 @@
-if (typeof String.prototype.hasExtension !== 'function') {
-    String.prototype.hasExtension = function(suffix) {
-        return this.indexOf(suffix, this.length - suffix.length) !== -1;
-    };
-}
+var hasExtension = function(input, suffix) {
+    return input.indexOf(suffix, input.length - suffix.length) !== -1;
+};
 
 var app = angular.module('pluginApp', []);
 
 app.factory('Repository', function($http) {
 	return {
 		getFiles: function() {
-			var promise = $http.get('https://api.github.com/repos/fireflies/watchlist/contents/plugins', {
+			var promise = $http.get('https://api.github.com/repos/fireflies/blacklist/contents/plugins', {
 				headers: {
 					'Accept': 'application/vnd.github.v3+json'
 				}
@@ -19,7 +17,7 @@ app.factory('Repository', function($http) {
 			return promise;
 		},
 		getFile: function(file) {
-			var promise = $http.get('https://api.github.com/repos/fireflies/watchlist/contents/' + file, {
+			var promise = $http.get('https://api.github.com/repos/fireflies/blacklist/contents/' + file, {
 				headers: {
 					'Accept': 'application/vnd.github.v3+json'
 				}
@@ -49,7 +47,7 @@ app.controller('pluginController', function($scope, $http, $timeout, Repository)
 
 			try {
 				for (var i = 0; i < data.length; i++) {
-					if(data[i].name.hasExtension('.yml')) {
+					if(hasExtension(data[i].name, '.yml')) {
 						Repository.getFile(data[i].path).then(function(file) {
 							var content = atob(file.content);
 							var yaml = jsyaml.load(content);
