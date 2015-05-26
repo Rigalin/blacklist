@@ -23,7 +23,6 @@ coming-soon: true
 ```yml
 id: <spigot forum ID>
 username: <spigot username>
-reason: <why they're on the list>
 reasons:
 - Why they're
 - on the watchlist
