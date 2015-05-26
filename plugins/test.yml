@@ -1,2 +1,5 @@
 name: Testing
-reason: Testing plugin
+link: http://google.com
+status: Resource deleted
+violations:
+- Contains copyrighted code from the Minepl0x leak
