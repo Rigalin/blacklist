@@ -4,12 +4,12 @@ if (typeof String.prototype.endsWith !== 'function') {
     };
 }
 
-var app = angular.module('userApp', []);
+var app = angular.module('pluginApp', []);
 
 app.factory('Repository', function($http) {
 	return {
 		getFiles: function() {
-			var promise = $http.get('https://api.github.com/repos/fireflies/watchlist/contents/users', {
+			var promise = $http.get('https://api.github.com/repos/fireflies/watchlist/contents/plugins', {
 				headers: {
 					'Accept': 'application/vnd.github.v3+json'
 				}
@@ -31,15 +31,15 @@ app.factory('Repository', function($http) {
 	}
 });
 
-app.controller('userController', function($scope, $http, Repository) {
+app.controller('pluginController', function($scope, $http, Repository) {
 	$scope.loading = false;
 	$scope.failed = false;
-	$scope.users = [];
+	$scope.plugins = [];
 
 	$scope.get = function() {
 		$scope.loading = true;
 		$scope.failed = false;
-		$scope.users = [];
+		$scope.plugins = [];
 
 		Repository.getFiles().then(function(data) {
 			if(!Array.isArray(data)) {
@@ -52,7 +52,8 @@ app.controller('userController', function($scope, $http, Repository) {
 				Repository.getFile(data[i].path).then(function(file) {
 					var content = atob(file.content);
 					try {
-						$scope.users.push(jsyaml.load(content));
+						var yaml = jsyaml.load(content);
+						$scope.plugins.push(yaml);
 					} catch (e) {
 						console.log(e);
 					}
@@ -61,11 +62,5 @@ app.controller('userController', function($scope, $http, Repository) {
 			$scope.loading = false;
 		});
 	};
-
-	$scope.spigot = function(author) {
-		if(typeof author.id === 'undefined') return '#';
-		return 'http://www.spigotmc.org/members/' + author.username + '.' + author.id + '/';
-	}
-
 	$scope.get();
 });

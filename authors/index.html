@@ -24,20 +24,15 @@
 
             <table class="table table-striped table-bordered">
                 <tr>
-                    <th>Spigot username</th>
-                    <th>Why?</th>
+                    <th>Name</th>
+                    <th>Reasoning</th>
                 </tr>
                 <tr ng-repeat="user in users" ng-hide="loading">
                     <td><a href="{{ spigot(user) }}">{{ user.username }}</a></td>
                     <td>
-                        <div ng-switch="user.multiple">
-                            <ul ng-switch-when="true">
-                                <li ng-repeat="reason in user.reasons">{{ reason }}</li>
-                            </ul>
-                            <ul ng-switch-default>
-                                <li>{{ user.reason }}</li>
-                            </ul>
-                        </div>
+                        <ul>
+                            <li ng-repeat="reason in user.reasons">{{ reason }}</li>
+                        </ul>
                     </td>
                 </tr>
             </table>
