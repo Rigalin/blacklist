@@ -1,11 +1,10 @@
-HTML  CSS   Result
-Edit on 
 .bs-callout {
     padding: 20px;
     margin: 20px 0;
     border: 1px solid #eee;
     border-left-width: 5px;
     border-radius: 3px;
+    background-color: #fdfdfd;
 }
 .bs-callout h4 {
     margin-top: 0;

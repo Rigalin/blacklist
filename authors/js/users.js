@@ -31,7 +31,7 @@ app.factory('Repository', function($http) {
 	}
 });
 
-app.controller('userController', function($scope, $http, Repository) {
+app.controller('userController', function($scope, $http, $timeout, Repository) {
 	$scope.loading = false;
 	$scope.failed = false;
 	$scope.users = [];
@@ -58,7 +58,10 @@ app.controller('userController', function($scope, $http, Repository) {
 					}
 				});
 			};
-			$scope.loading = false;
+
+			$timeout(function() {
+				$scope.loading = false;
+			}, 1000);
 		});
 	};
 
