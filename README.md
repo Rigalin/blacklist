@@ -10,7 +10,11 @@ _Coming soon_
 
 ##### Format
 ```yml
-coming-soon: true
+name: <plugin name>
+status: Active
+link: http://spigotmc.org/link/to/plugin
+violations:
+- Contains copyrighted code from <source>
 ```
 
 ### Users
