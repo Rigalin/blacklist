@@ -1,7 +1,10 @@
 Watchlist
 =========
 
-The data behind the Watchlist website. Inspired by samczsun's "[Plugin Blacklist]" website.
+The data behind the Watchlist website, inspired by samczsun's "[Plugin Blacklist]" website.
+This project is community driven, therefore some information may not be 100% correct but we will at least attempt to verify it before merging submissions.
+
+Please review our contribution guidelines below before contributing. Failure to conform to our guidelines will result in your submissions being deleted.
 
 ## Contributing
 
