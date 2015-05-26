@@ -6,7 +6,10 @@ The data behind the Watchlist website. Inspired by samczsun's "[Plugin Blacklist
 ## Contributing
 
 ### Plugins
-_Coming soon_
+1. Fork the repository.
+2. Create a `yml` file named after the author using the format below.
+3. Commit your files
+4. Submit a pull request, bitches love pull requests!
 
 ##### Format
 ```yml
@@ -40,5 +43,6 @@ You must provider at least their username and one reason.
 
 ### Notes
 - If an author goes by multiple aliases then use their most commonly known one, support for multiple names will be added later.
+- Spaces in plugin names should be replaced with an underscore when creating the `yml` file.
 
 [Plugin Blacklist]: http://samczsun.com/warning.html
